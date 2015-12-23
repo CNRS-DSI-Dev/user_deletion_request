@@ -41,7 +41,7 @@ Class MailService
      */
     public function mailDeleteAccount($requesterUid)
     {
-        $reason = trim(strip_tags(stripslashes($_POST['deletion_reason'])));
+        $reason = trim(nl2br(strip_tags(stripslashes($_POST['deletion_reason']))));
         if (empty($reason) || $reason === '') {
             return false;
         }
@@ -104,7 +104,7 @@ Class MailService
         $html = new \OCP\Template($this->appName, "mail_userdeletion_html", "");
         $html->assign('overwriteL10N', $this->l);
         $html->assign('requesterUid', $requesterUid);
-        $html->assign('reason', $_POST['deletion_reason']);
+        $html->assign('reason', $reason);
         $htmlMail = $html->fetchPage();
 
         $alttext = new \OCP\Template($this->appName, "mail_userdeletion_text", "");
