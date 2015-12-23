@@ -1,0 +1,12 @@
+#user_deletion_request textarea {
+	display: block;
+	width: 550px;
+	height: 100px;
+	resize: none;
+}
+
+#user_deletion_request .msg.error {
+	display: none;
+	width: 553px;
+    padding-left: 7px;
+}

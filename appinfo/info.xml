@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+    <id>user_deletion_request</id>
+    <name>User Deletion Request</name>
+    <description>Allows the user to send request to delete they're account.</description>
+    <version>1.0</version>
+    <licence>AGPLv3</licence>
+    <author>Victor Bordage-Gorry / Globalis</author>
+    <require>7</require>
+</info>
