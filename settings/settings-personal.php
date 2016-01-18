@@ -20,7 +20,7 @@ $tmpl = new \OCP\Template($c->query('AppName'), 'personnal');
 // Form traitment
 if (!empty($_POST)) {
     if (isset($_POST['deletion_reason']) && trim($_POST['deletion_reason']) !== '') {
-        $c->query('MailService')->mailDeleteAccount($user);
+        $c->query('MailService')->mailDeleteAccount(\OCP\User::getUser());
     }
 }
 
