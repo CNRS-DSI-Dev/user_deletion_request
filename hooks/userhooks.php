@@ -42,12 +42,13 @@ class UserHooks {
      * @author Victor Bordage-Gorry <victor.bordage-gorry@globalis-ms.com>
      * @copyright 2015 CNRS DSI / GLOBALIS media systems
      *
+     * @param     string   $user user's Uid
      */
-    public function postLogin () {
-
+    public function postLogin ($user) {
         // Verify default group
         $defaultGroup = $this->config->getSystemValue('deletion_account_request_default_exclusion_group');
-        if ($this->groupManager->get($defaultGroup)->searchUsers(\OCP\User::getUser())) {
+        $group = $this->groupManager->get($defaultGroup);
+        if ($group && $group->searchUsers($user->getUid())) {
             \OCP\User::logout();
             \OC_Util::redirectToDefaultPage();
             exit();
@@ -55,10 +56,9 @@ class UserHooks {
 
         // Verify configuration groups
         $configGroups = $this->config->getSystemValue('deletion_account_request_exclusion_groups');
-
         if (!empty($configGroups)) {
             foreach($configGroups as $groupKey => $groupValue) {
-               if ($this->groupManager->get($groupValue) && $this->groupManager->get($groupValue)->searchUsers(\OCP\User::getUser())) {
+               if ($this->groupManager->get($groupValue)->searchUsers($user->getUid())) {
                     \OCP\User::logout();
                     \OC_Util::redirectToDefaultPage();
                     exit();
